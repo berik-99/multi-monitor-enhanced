@@ -14,7 +14,7 @@ export default class LayoutManager {
 
     public showPanels() {
         this.hidePanels();
-        this._monitorchangedEventId = Main.layoutManager.connect('monitors-changed', this._monitorsChanged.bind(this));
+        this._monitorchangedEventId = Main.layoutManager.connect('monitors-changed', this.showPanels.bind(this));
         for (let i = 0; i < Main.layoutManager.monitors.length; i++) {
             if (i != Main.layoutManager.primaryIndex) {
                 let monitor = Main.layoutManager.monitors[i];
@@ -31,9 +31,5 @@ export default class LayoutManager {
             let panel = this.panels.pop();
             panel?.destroy();
         }
-    }
-
-    private _monitorsChanged() {
-        this.showPanels();
     }
 }

@@ -12,18 +12,14 @@ export class MMPanelClass extends Panel.Panel {
     constructor(monitor: Monitor) {
         super();
         this.monitor = monitor;
+        Main.layoutManager.panelBox.remove_child(this);
         this.panelBox = new St.BoxLayout({ name: 'panelBox', vertical: true, clip_to_allocation: true });
         Main.layoutManager.addChrome(this.panelBox, { affectsStruts: true, trackFullscreen: true });
-        this.panelBox.set_position(monitor.x, monitor.y);
-        this.panelBox.set_size(monitor.width, -1);
+        this.updatePanel();
         Main.layoutManager.uiGroup.set_child_below_sibling(this.panelBox, Main.layoutManager.panelBox);
+        this.panelBox.add_child(this);
         this.set_style_class_name(Main.panel.get_style_class_name());
         this.connect('destroy', this._onDestroy.bind(this));
-    }
-
-    _init() {
-        super._init();
-        Main.layoutManager.panelBox.remove_child(this);
         console.log('MMPanel _init');
     }
 

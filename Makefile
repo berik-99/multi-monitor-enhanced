@@ -21,7 +21,7 @@ UUID=$(NAME)@$(DOMAIN)
 deps: package.json
 	npm install
 
-prebuild: deps
+prebuild: clean deps
 	FRIENDLY_NAME="$(FRIENDLY_NAME)" \
 	NAME="$(NAME)" \
 	DOMAIN="$(DOMAIN)" \
