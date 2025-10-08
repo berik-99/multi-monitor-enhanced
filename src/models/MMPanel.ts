@@ -4,7 +4,6 @@ import St from 'gi://St';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as Panel from 'resource:///org/gnome/shell/ui/panel.js';
 
-
 export class MMPanelClass extends Panel.Panel {
     monitor: Monitor;
     panelBox: St.BoxLayout;
@@ -20,7 +19,8 @@ export class MMPanelClass extends Panel.Panel {
         this.panelBox.add_child(this);
         this.set_style_class_name(Main.panel.get_style_class_name());
         this.connect('destroy', this._onDestroy.bind(this));
-        console.log('MMPanel _init');
+        this.activitiesButtonHide();
+        this.quickSettingsMenuHide();
     }
 
     _onDestroy() {
